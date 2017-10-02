@@ -37,6 +37,11 @@ class website:
         self.rating = self.snippet("<span itemprop=\"ratingValue\">","</span>",rating_div,len("<span itemprop=\"ratingValue\">"))
         return self.rating
 
+    def reviews(self):
+        #Returns the first review show on the main page of the movie/series
+        self.review = self.snippet("<p itemprop=\"reviewBody\">","</p>",self.page_source,len("<p itemprop=\"reviewBody\">"))
+        return self.review
+
     def snippet(self,start,end,html_source,start_offset):
         snippet_index_start = html_source.find(start)
         snippet_index_end = html_source.find(end,snippet_index_start)
