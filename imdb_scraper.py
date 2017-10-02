@@ -21,7 +21,7 @@ class website:
         imgurl = self.snippet("src","itemprop",poster_content,len("src=")).replace("\n","").replace("\"","")
 
         #Change the image dimensions
-        self.imgurl=imgurl.replace("UX182_CR0,0,182,268_AL__QL50","UX400_CR0,0,400,585_AL__QL50") #Replace with @@._V1_QL50_SY1000_CR0,0,674,1000_AL_.jpg to directly get hd posters
+        self.imgurl=imgurl.replace("@._V1_UX182_CR0,0,182,268_AL__QL50.jpg","@._V1_QL50_SY1000_CR0,0,674,1000_AL_.jpg") #Replace with @._V1_QL50_SY1000_CR0,0,674,1000_AL_.jpg to directly get hd posters
 
         return self.imgurl #Only returns the image url
 
