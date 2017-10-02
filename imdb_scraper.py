@@ -5,6 +5,18 @@ class website:
         html_source = requests.get(self.url).text
         self.page_source = html_source
 
+    def __init__(self,search,toSearch):
+        if toSearch:
+            self.search_source = requests.get("http://imdb.com/find", params={'q':search}).text
+            first_result = self.snippet("Titles</h3>","</a>",self.search_source,len("<h3 class=\"findSectionHeader\"><a name=\"tt\"></a>Titles</h3>"))
+            url = self.snippet("<a href=",">",first_result,len("<a href="))
+            self.url = "http://imdb.com"+url.replace("\"","") #Remove double-quotes
+            print(self.url)
+            self.page_source = requests.get(self.url).text
+            #print(url)
+        else:
+            print("Set the 2nd parameter while initialising the object to True.")
+
     def title(self):
         #Returns the title of the movie
         title_div = self.snippet("<div class=\"title_wrapper\">","</span>",self.page_source,len("<div class=\"title_wrapper\">"))
