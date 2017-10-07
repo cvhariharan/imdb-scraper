@@ -1,10 +1,5 @@
 import requests,sys
-class website:
-    def __init__(self,url):
-        self.url = url
-        html_source = requests.get(self.url).text
-        self.page_source = html_source
-
+class Scraper:
     def __init__(self,search,toSearch):
         if toSearch:
             self.search_source = requests.get("http://imdb.com/find", params={'q':search}).text
@@ -15,13 +10,20 @@ class website:
             self.page_source = requests.get(self.url).text
             #print(url)
         else:
-            print("Set the 2nd parameter while initialising the object to True.")
+            self.url = search
+            html_source = requests.get(self.url).text
+            self.page_source = html_source
 
     def title(self):
         #Returns the title of the movie
         title_div = self.snippet("<div class=\"title_wrapper\">","</span>",self.page_source,len("<div class=\"title_wrapper\">"))
         self.title = self.snippet("<h1 itemprop=\"name\" class=\"\">","&nbsp;",title_div,len("<h1 itemprop=\"name\" class=\"\">"))
         return self.title
+
+    def movie_id(self):
+        #Returns the imdb id using the url
+        self.movie_id = self.url.split("/")[4]
+        return self.movie_id
 
     def poster(self):
         imdb_url = self.url
