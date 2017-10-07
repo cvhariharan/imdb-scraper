@@ -3,7 +3,7 @@ class Scraper:
     def __init__(self,search,toSearch):
         if toSearch:
             self.search_source = requests.get("http://imdb.com/find", params={'q':search}).text
-            first_result = self.snippet("Titles</h3>","</a>",self.search_source,len("<h3 class=\"findSectionHeader\"><a name=\"tt\"></a>Titles</h3>"))
+            first_result = self.snippet("<h3 class=\"findSectionHeader\"><a name=\"tt\"></a>Titles</h3>","<img src",self.search_source,len("<h3 class=\"findSectionHeader\"><a name=\"tt\"></a>Titles</h3>"))
             url = self.snippet("<a href=",">",first_result,len("<a href="))
             self.url = "http://imdb.com"+url.replace("\"","") #Remove double-quotes
             print(self.url)
