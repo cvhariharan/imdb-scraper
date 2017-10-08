@@ -1,6 +1,6 @@
 import imdb_scraper,requests
 movie_name = input("Name of the Movie or TV Series: ")
-imdb = imdb_scraper.website(movie_name,True)
+imdb = imdb_scraper.Scraper(movie_name,True)
 plot = imdb.plot()
 rating = imdb.rating()
 title = imdb.title()
